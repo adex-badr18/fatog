@@ -19,11 +19,11 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-white p-4 relative">
+        <nav className="bg-white px-4 py-2 relative">
             <div className="container flex justify-between items-center">
                 <div className="flex items-center">
-                    <img src={fatogLogo} className='w-20' alt="FATOG Logo" />
-                    <Link to="/" className="text-[#1d2a4d] text-2xl font-bold">
+                    <img src={fatogLogo} className='w-16' alt="FATOG Logo" />
+                    <Link to="/" className="text-[#1d2a4d] text-xl font-bold">
                         FATOG
                     </Link>
                 </div>
