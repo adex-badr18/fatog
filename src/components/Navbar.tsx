@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { FaTimes } from "react-icons/fa";
+import { IoCloseSharp } from "react-icons/io5";
+
 import fatogLogo from '../assets/fatog-logo.png';
 
 import { menuLinks } from "../constants/data";
@@ -19,7 +20,7 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-white px-4 py-2 relative">
+        <nav className="bg-white px-4 py-2 fixed w-full top-0 z-20 shadow-lg">
             <div className="container flex justify-between items-center">
                 <div className="flex items-center">
                     <img src={fatogLogo} className='w-16' alt="FATOG Logo" />
@@ -27,7 +28,7 @@ const Navbar: React.FC = () => {
                         FATOG
                     </Link>
                 </div>
-                <div className="hidden md:flex gap-4">
+                <div className="hidden md:flex gap-8">
                     {menuLinks.map(menu => (
                         <NavLink key={menu.id} to={menu.link}>{menu.name}</NavLink>
                     ))}
@@ -36,15 +37,15 @@ const Navbar: React.FC = () => {
                 {/* Responsive Menu */}
                 <div className="md:hidden">
                     <button className="text-[#1d2a4d]" onClick={toggleMobileMenu}>
-                        {isMobileMenuOpen ? <FaTimes size={30} className="" /> : <HiMenuAlt3 size={30} className="" />}
+                        {isMobileMenuOpen ? <IoCloseSharp size={30} className="" /> : <HiMenuAlt3 size={30} className="" />}
                     </button>
                 </div>
             </div>
 
             {/* Responsive Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden bg-white border-t-4 border-blue-400 absolute top-[7rem] left-0 right-0">
-                    <div className="flex flex-col">
+                <div className="md:hidden bg-white border-t-4 border-blue-400 absolute top-[5rem] left-0 right-0 z-10 shadow-md">
+                    <div className="flex flex-col divide-solid divide-y-2 divide-gray-200">
                         {
                             menuLinks.map(menu => (
                                 <MobileNavLink key={menu.id} to={menu.link} handleClick={closeMobileMenu}>
@@ -69,9 +70,9 @@ const NavLink: React.FC<NavLinkProps> = ({ to, children }) => {
     const { hash } = useLocation();
 
     return (
-        <Link to={to} className={clsx("text-[#1d2a4d] hover:text-blue-400 font-bold uppercase text-base py-1 hover:border-b-2 border-blue-400", { 'text-blue-400 border-b-2 border-blue-400 transition-all duration-300': hash.includes(to) })}>
+        <a href={to} className={clsx("text-[#1d2a4d] hover:text-blue-400 font-bold uppercase text-base py-1 hover:border-b-2 border-blue-400", { 'text-blue-400 border-b-2 border-blue-400 transition-all duration-300': hash.includes(to) })}>
             {children}
-        </Link>
+        </a>
     );
 };
 
@@ -79,13 +80,13 @@ const MobileNavLink: React.FC<NavLinkProps & { handleClick: () => void }> = ({ t
     const { hash } = useLocation();
 
     return (
-        <Link
-            to={to}
-            className={clsx("text-[#1d2a4d] text-sm font-bold uppercase mx-4 py-3 border-b-2 border-gray-200 transition duration-300", { 'text-blue-400': hash.includes(to) })}
+        <a
+            href={to}
+            className={clsx("text-[#1d2a4d] text-sm font-bold uppercase mx-4 py-3 transition duration-300", { 'text-blue-400': hash.includes(to) })}
             onClick={handleClick}
         >
             {children}
-        </Link>
+        </a>
     );
 };
 
