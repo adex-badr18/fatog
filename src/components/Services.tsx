@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import fatogLogo from '../assets/fatog-logo.png';
 import { ServiceType, servicesData } from '../constants/data';
+import Modal from './Modal';
+import ContactForm from './ContactForm';
 
 const Services: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
+
     return (
         <section className='flex flex-col justify-center items-center p-16 gap-5 relative min-h-screen bg-[url("/src/assets/lake-bg.jpg")] bg-cover bg-fixed'>
             <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}></div>
@@ -22,9 +34,14 @@ const Services: React.FC = () => {
                 </div>
 
                 <button
+                    onClick={openModal}
                     className="rounded border-2 border-neutral-50 px-7 py-3 text-sm font-semibold uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out bg-transparent hover:border-[#13c5dd] hover:bg-[#13c5dd] hover:text-[#0e204d] dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
                     Contact Us
                 </button>
+
+                <Modal isOpen={isOpen} onClose={closeModal}>
+                    <ContactForm />
+                </Modal>
 
             </div>
         </section>
