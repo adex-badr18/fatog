@@ -1,5 +1,3 @@
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import NotFound from "./components/NotFound";
