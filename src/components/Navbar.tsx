@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
-
 import fatogLogo from '../assets/fatog-logo.png';
-
 import { menuLinks } from "../constants/data";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
@@ -20,7 +18,7 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-white px-4 py-2 fixed w-full top-0 z-20 shadow-lg">
+        <nav className="bg-white px-4 py-2">
             <div className="container flex justify-between items-center">
                 <div className="flex items-center">
                     <img src={fatogLogo} className='w-16' alt="FATOG Logo" />
