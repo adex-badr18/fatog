@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import fatogLogo from '../assets/fatog-logo.png';
 import { RxDash } from "react-icons/rx";
 import { LuPhoneCall } from "react-icons/lu";
@@ -12,9 +11,9 @@ const Footer = () => {
                 <div className='flex flex-col gap-2 flex-1'>
                     <div className="flex items-center">
                         <img src={fatogLogo} className='w-20' alt="FATOG Logo" />
-                        <Link to="/" className="text-[#1d2a4d] text-3xl font-bold -ml-1">
+                        <h3 className="text-[#1d2a4d] text-3xl font-bold -ml-1">
                             FATOG
-                        </Link>
+                        </h3>
                     </div>
 
                     <p className='text-'>At FATOG, our mission is to promote aquaculture practices in Nigeria. For over 10 years, FATOG have demonstrated commitment to responsible aquaculture.</p>
@@ -26,10 +25,10 @@ const Footer = () => {
                         {
                             menuLinks.map((menu, index) => (
                                 <li key={index}>
-                                    <Link to={menu.link} className='flex items-center gap-1 mb-1'>
+                                    <a href={menu.link} className='flex items-center gap-1 mb-1'>
                                         <RxDash size={20} className="text-blue-600" />
                                         <h4 className='hover:text-blue-600'>{menu.name}</h4>
-                                    </Link>
+                                    </a>
                                 </li>
                             ))
                         }
