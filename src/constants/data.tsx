@@ -4,6 +4,13 @@ import { FaHandHoldingHeart, FaClock, FaChartLine, FaRegLightbulb } from "react-
 import { GiCirclingFish } from "react-icons/gi";
 import { MdOutlineCoffeeMaker } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
+import heroImage1 from '../assets/fish-hero.webp';
+import heroImage2 from '../assets/fish-pond.jpg';
+import heroImage3 from '../assets/fish-hero3.png';
+import productImage1 from '../assets/fingerlings.webp';
+import productImage2 from '../assets/table-sized.jpg';
+import productImage3 from '../assets/dry-fish.jpg';
+import productImage4 from '../assets/fish-feeds.webp';
 
 type MenuType = {
     id: number;
@@ -27,20 +34,20 @@ type HeroType = {
 
 export const heroData: HeroType[] = [
     {
-        backgroundImage: '/src/assets/fish-hero.webp',
+        backgroundImage: heroImage1,
         headline: 'Discover the Ocean Products',
         tagline: 'A wide range of premium fishery products for every Farmer.',
         icon: <Logo />
 
     },
     {
-        backgroundImage: '/src/assets/fish-pond.jpg',
+        backgroundImage: heroImage2,
         headline: 'Your Catch, Our Passion',
         tagline: 'Innovation and Services to The Aquaculture Sector.',
         icon: <Logo />
     },
     {
-        backgroundImage: '/src/assets/fish-hero3.png',
+        backgroundImage: heroImage3,
         headline: 'Aquatic Farming',
         tagline: 'Get Quality Aquatic Products and Services for your Farm.',
         icon: <Logo />
@@ -79,22 +86,22 @@ export type ProductsType = {
 
 export const productsData: ProductsType[] = [
     {
-        img: '/src/assets/fingerlings.webp',
+        img: productImage1,
         title: 'Young Catfish',
         desc: 'Fingerlings, post-fingerlins, and jumbo are all available for sales.'
     },
     {
-        img: '/src/assets/table-sized.jpg',
+        img: productImage2,
         title: 'Catfish',
         desc: 'Medium-size and Table-size catfish are also available for sales.'
     },
     {
-        img: '/src/assets/dry-fish.jpg',
+        img: productImage3,
         title: 'Processed Catfish',
         desc: 'We also offer processed and packaged oven-dried catfish'
     },
     {
-        img: '/src/assets/fish-feeds.webp',
+        img: productImage4,
         title: 'Fish Feeds',
         desc: 'Purchase our well-formulated feeds to ensure a rapid growth of your fish.'
     },
