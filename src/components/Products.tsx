@@ -3,17 +3,19 @@ import { ProductsType, productsData } from '../constants/data';
 
 const Products: React.FC = () => {
     return (
-        <section id='products' className='flex flex-col px-16 pt-64 pb-10 gap-8 bg-[#eff3ff] relative min-h-screen'>
-            <div className="flex flex-col bg-[#0e204d] absolute left-0 top-0 p-12 w-full md:w-1/2">
-                <h3 className='font-bold uppercase text-base leading-4 text-[#13c5dd] mb-4'><span className='mr-2'>//</span>Our Products</h3>
+        <section id='products' className='flex flex-col px-16 pb-16 gap-8 bg-[#eff3ff] relative min-h-screen'>
+            <div className="flex -mx-16">
+                <div className="flex flex-col bg-[#0e204d] p-12 w-full md:w-1/2">
+                    <h3 className='font-bold uppercase text-base leading-4 text-[#13c5dd] mb-4'><span className='mr-2'>//</span>Our Products</h3>
 
-                <h1 className='text-3xl md:text-4xl text-white font-bold'>Our Products are Tailored to serve your needs</h1>
-            </div>
-            <div className="hidden md:flex justify-center items-center absolute right-0 top-0 p-12 w-full md:w-1/2 md:h-[208px]">
-                <h1 className='text-base text-gray-500 font-medium'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
+                    <h1 className='text-3xl md:text-4xl text-white font-bold'>Our Products are Tailored to serve your needs</h1>
+                </div>
+                <div className="hidden md:flex justify-center items-center p-12 w-full md:w-1/2">
+                    <h1 className='text-base text-gray-500 font-medium'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
+                </div>
             </div>
 
-            <div className="grid-cols-1 sm:grid md:grid-cols-2 lg:grid-cols-4 ">
+            <div className="grid-cols-1 sm:grid md:grid-cols-2 lg:grid-cols-4">
                 {
                     productsData.map((product: ProductsType, index: number) => (
                         <div

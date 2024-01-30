@@ -59,7 +59,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className='bg-[#a9bdfa] px-16 py-8 text-center'>
+            <div className='bg-[#a9bdfa] px-16 py-5 text-center'>
                 <p>
                     Copyright &copy; {new Date().getFullYear()} <span className="text-blue-600 font-bold">FATOG</span>. All rights reserved
                 </p>

@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import fatogLogo from '../assets/fatog-logo.png';
-import { Link } from 'react-router-dom';
 import { heroData } from '../constants/data';
-
-// import hero1 from '../assets/fish-hero.webp';
-// import hero2 from '../assets/fish-hero2.webp';
 
 const Hero: React.FC = () => {
     const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
@@ -52,13 +48,13 @@ const Hero: React.FC = () => {
                         {currentHero.icon}
                         <h2 className="mb-4 text-6xl font-bold">{currentHero.headline}</h2>
                         <p className="mb-10 text-xl font-semibold w-1/2 mx-auto">{currentHero.tagline}</p>
-                        <Link
-                            to="#about"
+                        <a
+                            href="#about"
                             className="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out bg-[#13c5dd] hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                             data-te-ripple-init
                             data-te-ripple-color="light">
                             Get Started
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </div>

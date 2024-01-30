@@ -6,7 +6,7 @@ import Services from '../components/Services';
 
 const Landing: React.FC = () => {
     return (
-        <main className="mt-16">
+        <main>
             <Hero />
             <About />
             <Products />
