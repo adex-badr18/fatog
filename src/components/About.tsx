@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import aboutImage from '../assets/fish-red.jpg';
 import { stats } from '../constants/data';
 import { StatsType } from '../constants/data';
+import Modal from './Modal';
+import ContactForm from './ContactForm';
 
 const About: React.FC = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
+
     return (
         <section id='about' className='flex flex-col md:flex-row items-start md:justify-between lg:items-center p-16 gap-8 min-h-screen'>
             <div className="w-full sm:w-[50%] md:w-[45%] md:min-w-[520px] md:mr-4 mb-4 md:mb-0 border-l-[16px] border-[#b7dde2] pl-3">
@@ -18,9 +30,14 @@ const About: React.FC = () => {
                 <p className='text-base text-gray-700 mb-7'>At FATOG Fishery Enterprises, we specialize in providing a diverse range of high-quality aqua products and services - from our carefully bred fingerlings to the processed and packaged oven-dried fishes. With a passion for excellence, we also offer specialized services such as feed mill production, hatchery management, and consultancy.</p>
 
                 <button
+                    onClick={openModal}
                     className="self-start rounded-md border-2 border-[#0e204d] px-7 py-[10px] mb-7 text-sm font-medium uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:border-[#0e204d] focus:text-white focus:outline-none focus:ring-0 active:border-[#0e204d] active:text-white dark:hover:bg-opacity-10">
                     Contact Us
                 </button>
+
+                <Modal isOpen={isOpen} onClose={closeModal}>
+                    <ContactForm />
+                </Modal>
 
                 <hr className='mb-7' />
 
