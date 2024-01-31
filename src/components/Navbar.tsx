@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
 
                     <button
                         onClick={openModal}
-                        className="hidden md:block rounded-md border-2 border-[#0e204d] px-6 ml-4 py-[10px] text-sm font-medium uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:border-[#0e204d] focus:text-white focus:outline-none focus:ring-0 active:border-[#0e204d] active:text-white dark:hover:bg-opacity-10">
+                        className="hidden md:block rounded-md border-2 border-[#0e204d] px-6 ml-4 py-[10px] text-sm font-medium uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:outline-none dark:hover:bg-opacity-10">
                         Contact Us
                     </button>
 
