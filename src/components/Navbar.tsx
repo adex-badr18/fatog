@@ -33,8 +33,9 @@ const Navbar: React.FC = () => {
             <div className="container flex justify-between items-center">
                 <div className="flex items-center">
                     <img src={fatogLogo} className='w-16' alt="FATOG Logo" />
-                    <Link to="/" className="text-[#1d2a4d] text-xl font-bold">
-                        FATOG
+                    <Link to="/" className="flex flex-col items-center text-[#1d2a4d] font-bold">
+                        <span className="text-2xl">FATOG</span>
+                        <span className="text-[7px]">Fishery Enterprises</span>
                     </Link>
                 </div>
                 <div className="hidden md:flex items-center gap-8">

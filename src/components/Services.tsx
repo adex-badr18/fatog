@@ -52,7 +52,10 @@ export const Logo: React.FC = () => {
     return (
         <div className='flex flex-col items-center mb-8'>
             <img src={fatogLogo} className='w-[100px] invert' alt="FATOG Logo" />
-            <h1 className='text-white font-bold text-2xl'>FATOG</h1>
+            <h1 className='flex flex-col items-center text-white font-bold'>
+                <span className="text-2xl">FATOG</span>
+                <span className="text-[7px]">Fishery Enterprises</span>
+            </h1>
         </div>
     )
 }
