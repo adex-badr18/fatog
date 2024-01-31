@@ -5,9 +5,20 @@ import fatogLogo from '../assets/fatog-logo.png';
 import { menuLinks } from "../constants/data";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
+import Modal from "./Modal";
+import ContactForm from "./ContactForm";
 
 const Navbar: React.FC = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(prev => !prev);
@@ -26,10 +37,20 @@ const Navbar: React.FC = () => {
                         FATOG
                     </Link>
                 </div>
-                <div className="hidden md:flex gap-8">
+                <div className="hidden md:flex items-center gap-8">
                     {menuLinks.map(menu => (
                         <NavLink key={menu.id} to={menu.link}>{menu.name}</NavLink>
                     ))}
+
+                    <button
+                        onClick={openModal}
+                        className="hidden md:block rounded-md border-2 border-[#0e204d] px-6 ml-4 py-[10px] text-sm font-medium uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:border-[#0e204d] focus:text-white focus:outline-none focus:ring-0 active:border-[#0e204d] active:text-white dark:hover:bg-opacity-10">
+                        Contact Us
+                    </button>
+
+                    <Modal isOpen={isOpen} onClose={closeModal}>
+                        <ContactForm />
+                    </Modal>
                 </div>
 
                 {/* Responsive Menu */}
