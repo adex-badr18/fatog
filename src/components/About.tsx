@@ -18,7 +18,7 @@ const About: React.FC = () => {
 
     return (
         <section id='about' className='flex flex-col md:flex-row items-start md:justify-between lg:items-center p-16 gap-8 min-h-screen'>
-            <div className="w-full sm:w-[50%] md:w-[45%] md:min-w-[520px] md:mr-4 mb-4 md:mb-0 border-l-[16px] border-[#b7dde2] pl-3">
+            <div className="w-full md:w-[45%] md:min-w-[520px] md:mr-4 mb-4 md:mb-0 border-l-[16px] border-[#b7dde2] pl-3">
                 <img src={aboutImage} className='w-full md:w-[90%]' alt="Catfish Hatchery" />
             </div>
 

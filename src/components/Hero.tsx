@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
                 <div className="flex h-full items-center justify-center">
                     <div className="text-white w-full px-5">
                         {currentHero.icon}
-                        <h2 className="mb-4 text-4xl sm:text-4xl md:text-6xl font-bold">{currentHero.headline}</h2>
+                        <h2 className="mb-4 text-5xl md:text-6xl font-bold">{currentHero.headline}</h2>
                         <p className="mb-10 text-xl font-semibold w-1/2 mx-auto">{currentHero.tagline}</p>
                         <a
                             href="#about"
