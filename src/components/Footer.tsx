@@ -7,7 +7,7 @@ import { menuLinks } from "../constants/data";
 const Footer = () => {
     return (
         <footer className='flex flex-col gap-4 bg-[#eff3ff] text-[#1d2a4d]'>
-            <div className='flex flex-col md:flex-row gap-8 md:gap-20 p-16'>
+            <div className='flex flex-col md:flex-row gap-8 md:gap-20 p-8 md:p-16'>
                 <div className='flex flex-col gap-2 flex-1'>
                     <div className="flex items-center">
                         <img src={fatogLogo} className='w-20' alt="FATOG Logo" />

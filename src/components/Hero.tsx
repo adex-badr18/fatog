@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
 
     return (
         <section
-            className="relative overflow-hidden h-[565px] bg-cover bg-no-repeat p-12 text-center" style={{ backgroundImage: `url('${currentHero.backgroundImage}')` }}>
+            className="relative overflow-hidden h-[565px] bg-cover bg-no-repeat p-16 text-center" style={{ backgroundImage: `url('${currentHero.backgroundImage}')` }}>
 
             {/* Left arrow button */}
             <button className="hidden md:flex justify-center items-center absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl cursor-pointer h-8 w-8 bg-[#1d2a4d] rounded-full z-10" onClick={() => nav('prev')}>
@@ -65,8 +65,8 @@ const Hero: React.FC = () => {
 export const Logo: React.FC = () => {
     return (
         <div className='flex flex-col items-center mb-5'>
-            <img src={fatogLogo} className='w-14 invert' alt="FATOG Logo" />
-            <h1 className='text-white font-bold text-xl'>FATOG</h1>
+            <img src={fatogLogo} className='w-[100px] invert' alt="FATOG Logo" />
+            <h1 className='text-white font-bold text-2xl'>FATOG</h1>
         </div>
     )
 }

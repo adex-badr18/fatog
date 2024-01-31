@@ -17,12 +17,12 @@ const About: React.FC = () => {
     };
 
     return (
-        <section id='about' className='flex flex-col md:flex-row items-start md:justify-between lg:items-center p-16 gap-8 min-h-screen'>
-            <div className="w-full md:w-[45%] md:min-w-[520px] md:mr-4 mb-4 md:mb-0 border-l-[16px] border-[#b7dde2] pl-3">
+        <section id='about' className='flex flex-col md:flex-row items-start md:justify-between lg:items-center p-8 md:p-16 gap-6 md:gap-8 min-h-screen'>
+            <div className="w-full md:w-[45%] md:min-w-[520px] mb-4 md:mb-0 border-l-[16px] border-[#b7dde2] pl-3">
                 <img src={aboutImage} className='w-full md:w-[90%]' alt="Catfish Hatchery" />
             </div>
 
-            <div className="flex flex-col md:w-[55%]">
+            <div className="flex flex-col">
                 <h3 className='font-bold uppercase text-base leading-4 text-[#13c5dd] mb-4'><span className='mr-1'>//</span>About Us</h3>
 
                 <h1 className='text-3xl md:text-4xl text-[#0e204d] font-bold mb-4'>Delivery of Fish Farming Products and Aqua Services</h1>

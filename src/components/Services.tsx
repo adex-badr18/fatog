@@ -16,7 +16,7 @@ const Services: React.FC = () => {
     };
 
     return (
-        <section className='flex flex-col justify-center items-center p-16 gap-5 relative min-h-screen bg-[url("/src/assets/lake-bg.jpg")] bg-cover bg-fixed'>
+        <section className='flex flex-col justify-center items-center p-8 md:p-16 gap-5 relative min-h-screen bg-[url("/src/assets/lake-bg.jpg")] bg-cover bg-fixed'>
             <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}></div>
 
             <div id='services' className='z-10 flex flex-col items-center'>
