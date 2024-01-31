@@ -44,9 +44,9 @@ const Hero: React.FC = () => {
                 className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
 
                 <div className="flex h-full items-center justify-center">
-                    <div className="text-white w-full">
+                    <div className="text-white w-full px-5">
                         {currentHero.icon}
-                        <h2 className="mb-4 text-6xl font-bold">{currentHero.headline}</h2>
+                        <h2 className="mb-4 text-4xl sm:text-4xl md:text-6xl font-bold">{currentHero.headline}</h2>
                         <p className="mb-10 text-xl font-semibold w-1/2 mx-auto">{currentHero.tagline}</p>
                         <a
                             href="#about"
