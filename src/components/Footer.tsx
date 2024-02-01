@@ -11,9 +11,10 @@ const Footer = () => {
                 <div className='flex flex-col gap-2 flex-1'>
                     <div className="flex items-center">
                         <img src={fatogLogo} className='w-20' alt="FATOG Logo" />
-                        <h3 className="text-[#1d2a4d] text-3xl font-bold -ml-1">
-                            FATOG
-                        </h3>
+                        <h1 className='flex flex-col items-center text-[#1d2a4d] font-bold'>
+                            <span className="text-3xl">FATOG</span>
+                            <span className="text-[9px]">Fishery Enterprises</span>
+                        </h1>
                     </div>
 
                     <p className='text-'>At FATOG, our mission is to promote aquaculture practices in Nigeria. For over 10 years, FATOG have demonstrated commitment to responsible aquaculture.</p>
