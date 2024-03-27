@@ -3,7 +3,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import fatogLogo from '../assets/fatog-logo.png';
 import { heroData } from '../constants/data';
 
-const Hero: React.FC = () => {
+const Hero = () => {
     const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
 
     const currentHero = heroData[currentHeroIndex];
 
-    const nav = (direction: 'prev' | 'next') => {
+    const nav = (direction) => {
         if (direction === 'prev') {
             setCurrentHeroIndex((prevIndex) => (prevIndex - 1 + heroData.length) % heroData.length);
         } else if (direction === 'next') {
@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
     );
 };
 
-export const Logo: React.FC = () => {
+export const Logo = () => {
     return (
         <div className='flex flex-col items-center mb-5'>
             <img src={fatogLogo} className='w-[100px] invert' alt="FATOG Logo" />

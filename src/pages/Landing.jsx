@@ -4,7 +4,7 @@ import About from '../components/About';
 import Products from '../components/Products';
 import Services from '../components/Services';
 
-const Landing: React.FC = () => {
+const Landing = () => {
     return (
         <main>
             <Hero />

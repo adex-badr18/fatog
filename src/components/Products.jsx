@@ -1,7 +1,7 @@
 import React from 'react';
-import { ProductsType, productsData } from '../constants/data';
+import { productsData } from '../constants/data';
 
-const Products: React.FC = () => {
+const Products = () => {
     return (
         <section id='products' className='flex flex-col px-8 md:px-16 pb-8 md:pb-16 gap-6 md:gap-8 bg-[#eff3ff] relative min-h-screen'>
             <div className="flex -mx-8 md:-mx-16">
@@ -17,7 +17,7 @@ const Products: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
-                    productsData.map((product: ProductsType, index: number) => (
+                    productsData.map((product, index) => (
                         <div
                             key={index}
                             className="w-full flex flex-col rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 sm:shrink-0 sm:grow sm:basis-0">

@@ -3,16 +3,16 @@ import emailjs from '@emailjs/browser';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ContactForm: React.FC = () => {
-    const form = useRef<HTMLFormElement | null>(null);
+const ContactForm = () => {
+    const form = useRef(null);
     const serviceId = import.meta.env.VITE_SERVICE_ID;
     const templateId = import.meta.env.VITE_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
-    function sendEmail(e: React.FormEvent<HTMLFormElement>) {
+    function sendEmail(e) {
         e.preventDefault();
 
-        emailjs.sendForm(serviceId, templateId, form.current!, publicKey)
+        emailjs.sendForm(serviceId, templateId, form.current, publicKey)
             .then(function (response) {
                 if (response.status === 200) {
                     console.log('SUCCESS!', response.status, response.text);
@@ -23,7 +23,7 @@ const ContactForm: React.FC = () => {
                         transition: Slide
                     });
 
-                    form.current!.reset();
+                    form.current.reset();
                 }
             }, function (error) {
                 console.log('FAILED...', error);
@@ -67,4 +67,4 @@ const ContactForm: React.FC = () => {
     )
 }
 
-export default ContactForm
+export default ContactForm;

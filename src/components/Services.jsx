@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import fatogLogo from '../assets/fatog-logo.png';
-import { ServiceType, servicesData } from '../constants/data';
+import { servicesData } from '../constants/data';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
 
-const Services: React.FC = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+const Services = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
         setIsOpen(true);
@@ -26,7 +26,7 @@ const Services: React.FC = () => {
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-16 gap-y-10 mb-16'>
                     {
-                        servicesData.map((service: ServiceType, index: number) => (
+                        servicesData.map((service, index) => (
                             <Service key={index} icon={service.icon} desc={service.desc} />
                         ))
                     }
@@ -48,7 +48,7 @@ const Services: React.FC = () => {
     )
 }
 
-export const Logo: React.FC = () => {
+export const Logo = () => {
     return (
         <div className='flex flex-col items-center mb-8'>
             <img src={fatogLogo} className='w-[100px] invert' alt="FATOG Logo" />
@@ -60,7 +60,7 @@ export const Logo: React.FC = () => {
     )
 }
 
-export const Service: React.FC<ServiceType> = ({ icon, desc }) => {
+export const Service = ({ icon, desc }) => {
     return (
         <div className='flex flex-col items-center gap-7'>
             <div className='w-32 h-32 text-6xl text-[#13c5dd] border-2 border-[#13c5dd] rounded-md'>

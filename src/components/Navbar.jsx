@@ -8,9 +8,9 @@ import clsx from "clsx";
 import Modal from "./Modal";
 import ContactForm from "./ContactForm";
 
-const Navbar: React.FC = () => {
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+const Navbar = () => {
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
         setIsOpen(true);
@@ -81,12 +81,7 @@ const Navbar: React.FC = () => {
     );
 };
 
-interface NavLinkProps {
-    to: string;
-    children: React.ReactNode;
-}
-
-const NavLink: React.FC<NavLinkProps> = ({ to, children }) => {
+const NavLink = ({ to, children }) => {
     const { hash } = useLocation();
 
     return (
@@ -96,7 +91,7 @@ const NavLink: React.FC<NavLinkProps> = ({ to, children }) => {
     );
 };
 
-const MobileNavLink: React.FC<NavLinkProps & { handleClick: () => void }> = ({ to, children, handleClick }) => {
+const MobileNavLink = ({ to, children, handleClick }) => {
     const { hash } = useLocation();
 
     return (

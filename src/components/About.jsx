@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import aboutImage from '../assets/fish-red.jpg';
 import { stats } from '../constants/data';
-import { StatsType } from '../constants/data';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
 
-const About: React.FC = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+const About = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
         setIsOpen(true);
@@ -47,11 +46,11 @@ const About: React.FC = () => {
     )
 }
 
-const Stats: React.FC = () => {
+const Stats = () => {
     return (
         <div className='flex flex-wrap gap-10'>
             {
-                stats.map((stat: StatsType, index: number) => (
+                stats.map((stat, index) => (
                     <div key={index} className='flex gap-4 flex-1'>
                         <span className='text-[#13c5dd]'>{stat.icon}</span>
                         <div className='flex flex-col'>

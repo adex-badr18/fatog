@@ -12,27 +12,16 @@ import productImage2 from '../assets/table-sized.jpg';
 import productImage3 from '../assets/dry-fish.jpg';
 import productImage4 from '../assets/fish-feeds.webp';
 
-type MenuType = {
-    id: number;
-    name: string;
-    link: string;
-};
 
-export const menuLinks: MenuType[] = [
+
+export const menuLinks = [
     { id: 1, name: 'Home', link: '/' },
     { id: 2, name: 'About', link: '#about' },
     { id: 3, name: 'Products', link: '#products' },
     { id: 4, name: 'Services', link: '#services' },
 ];
 
-type HeroType = {
-    backgroundImage: string;
-    headline: string;
-    tagline: string;
-    icon: React.ReactNode;
-}
-
-export const heroData: HeroType[] = [
+export const heroData = [
     {
         backgroundImage: heroImage1,
         headline: 'Discover the Ocean Products',
@@ -54,13 +43,7 @@ export const heroData: HeroType[] = [
     },
 ];
 
-export type StatsType = {
-    icon: React.ReactNode;
-    count: string;
-    desc: string;
-};
-
-export const stats: StatsType[] = [
+export const stats = [
     {
         icon: <FaHandHoldingHeart size={30} />,
         count: '99%',
@@ -78,13 +61,7 @@ export const stats: StatsType[] = [
     },
 ];
 
-export type ProductsType = {
-    img: string;
-    title: string;
-    desc: string;
-};
-
-export const productsData: ProductsType[] = [
+export const productsData = [
     {
         img: productImage1,
         title: 'Young Catfish',
@@ -107,12 +84,7 @@ export const productsData: ProductsType[] = [
     },
 ];
 
-export type ServiceType = {
-    icon: React.ReactNode;
-    desc: string;
-};
-
-export const servicesData: ServiceType[] = [
+export const servicesData = [
     {
         icon: <GiCirclingFish />,
         desc: 'Hatchery Supplies'

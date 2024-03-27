@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleUp } from "react-icons/fa6";
 
-const ScrollToTop: React.FC = () => {
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+const ScrollToTop = () => {
+    const [isVisible, setIsVisible] = useState(false);
 
     const setScroll = () => {
-        const position: number = window.scrollY;
+        const position = window.scrollY;
         setIsVisible(position > 50);
     };
 
