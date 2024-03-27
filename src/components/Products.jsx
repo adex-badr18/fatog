@@ -1,5 +1,7 @@
 import React from 'react';
 import { productsData } from '../constants/data';
+import {Button} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const Products = () => {
     return (
@@ -9,9 +11,15 @@ const Products = () => {
                     <h3 className='font-bold uppercase text-base leading-4 text-[#13c5dd] mb-4'><span className='mr-2'>//</span>Our Products</h3>
 
                     <h1 className='text-3xl md:text-4xl text-white font-bold'>Our Products are Tailored to serve your needs</h1>
+
+                    <h1 className='md:hidden text-base text-gray-300 font-medium mt-6'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
+
+                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'gray.100'}} display={{base: 'flex', md: 'none'}}>View available products</Button>
                 </div>
-                <div className="hidden md:flex justify-center items-center p-8 md:p-16 w-full flex-1">
+                <div className="hidden md:flex flex-col justify-center items-center p-8 md:p-16 w-full flex-1">
                     <h1 className='text-base text-gray-500 font-medium'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
+
+                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'white'}} display={{base: 'none', md: 'flex'}}>View available products</Button>
                 </div>
             </div>
 

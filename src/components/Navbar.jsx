@@ -7,6 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Modal from "./Modal";
 import ContactForm from "./ContactForm";
+import { Button, Stack } from '@chakra-ui/react';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,11 +44,26 @@ const Navbar = () => {
                         <NavLink key={menu.id} to={menu.link}>{menu.name}</NavLink>
                     ))}
 
-                    <button
-                        onClick={openModal}
-                        className="hidden md:block rounded-md border-2 border-[#0e204d] px-6 ml-4 py-[10px] text-sm font-medium uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:outline-none dark:hover:bg-opacity-10">
-                        Contact Us
-                    </button>
+                    <Stack direction='row' spacing='3'>
+                        <Button as={Link} to='login' colorScheme='blue' size='sm' textTransform='uppercase'>Login</Button>
+
+                        <Button
+                            colorScheme='blue'
+                            textTransform='uppercase'
+                            variant='outline'
+                            onClick={openModal}
+                            size='sm'
+                        >
+                            Contact Us
+                        </Button>
+
+                        {/* <button
+                            onClick={openModal}
+                            className="hidden md:block rounded-md border-2 border-[#0e204d] px-4 py-[8px] text-xs font-semibold uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:outline-none dark:hover:bg-opacity-10">
+                            Contact Us
+                        </button> */}
+
+                    </Stack>
 
                     <Modal isOpen={isOpen} onClose={closeModal}>
                         <ContactForm />

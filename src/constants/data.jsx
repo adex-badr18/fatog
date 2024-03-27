@@ -16,9 +16,9 @@ import productImage4 from '../assets/fish-feeds.webp';
 
 export const menuLinks = [
     { id: 1, name: 'Home', link: '/' },
-    { id: 2, name: 'About', link: '#about' },
-    { id: 3, name: 'Products', link: '#products' },
-    { id: 4, name: 'Services', link: '#services' },
+    { id: 2, name: 'About', link: '/#about' },
+    { id: 3, name: 'Products', link: '/#products' },
+    { id: 4, name: 'Services', link: '/#services' },
 ];
 
 export const heroData = [
