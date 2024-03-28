@@ -16,6 +16,11 @@ import { loader as ProductListLoader } from "./pages/ProductList";
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from "./pages/Dashboard";
 import { loader as DashboardLoader } from "./pages/Dashboard";
+import OrderCreate from "./pages/orders/OrderCreate";
+import { loader as OrderCreateLoader } from "./pages/orders/OrderCreate";
+import Orders from "./pages/orders/Orders";
+import OrderList from "./pages/orders/OrderList";
+import OrderItem from "./pages/orders/OrderItem";
 
 async function loader({ request }) {
     await requireAuth(request);
@@ -30,6 +35,11 @@ const router = createBrowserRouter(createRoutesFromChildren(
         <Route path='forgot-password' element={<ForgotPassword />} />
 
         <Route path='products' element={<ProductList />} loader={ProductListLoader} />
+
+        <Route path='order/create' element={<OrderCreate />} loader={OrderCreateLoader} />
+        <Route path='orders' element={<Orders />} />
+        <Route path='orders/:id' element={<OrderList />} />
+        <Route path='orders/:id/orderlist/:id' element={<OrderItem />} />
 
         <Route path='dashboard' element={<Dashboard />} loader={DashboardLoader} />
 

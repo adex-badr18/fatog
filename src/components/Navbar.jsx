@@ -74,6 +74,8 @@ const Navbar = () => {
                                 </MenuButton>
                                 <MenuList py='0'>
                                     <MenuItem as={Link} icon={<RxAvatar />} to='/profile'>Profile</MenuItem>
+                                    {/* <MenuDivider my='0' /> */}
+                                    <MenuItem as={Link} icon={<RxAvatar />} to='/orders'>My Orders</MenuItem>
                                     <MenuDivider my='0' />
                                     <MenuItem as={Link} icon={<RiLogoutCircleRLine />} onClick={() => logout()}>Logout</MenuItem>
                                 </MenuList>
@@ -137,6 +139,18 @@ const Navbar = () => {
                                     textTransform='uppercase'
                                 >
                                     Profile
+                                </Link>
+                                <Link
+                                    as={RouterLink}
+                                    to='/orders'
+                                    color='#1d2a4d'
+                                    mx='4'
+                                    py='3'
+                                    fontSize='sm'
+                                    fontWeight='bold'
+                                    textTransform='uppercase'
+                                >
+                                    My Orders
                                 </Link>
                                 <Link
                                     as={RouterLink}
