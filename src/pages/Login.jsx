@@ -1,10 +1,19 @@
 import { Box, Heading, Text, Button, Flex, Stack, Link, Icon } from "@chakra-ui/react";
 import LoginInput from "../components/LoginInput";
 import PasswordInput from "../components/PasswordInput";
+import { BiError } from "react-icons/bi";
 import Logo from '../components/Logo';
 import bgImage from '../assets/inventoryImg.webp';
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useLoaderData, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { authenticate } from "../api/users";
+import { useToastHook } from "../hooks/useToast";
+import useAuth from "../hooks/useAuth";
+
+export async function loader({ request }) {
+    const error = new URL(request.url).searchParams.get('message')
+    return { error, request };
+}
 
 const Login = () => {
     const {
@@ -12,32 +21,34 @@ const Login = () => {
         control,
         formState: { errors, isSubmitting },
     } = useForm();
+    const [toastState, setToastState] = useToastHook();
+    const { login } = useAuth();
+    const navigate = useNavigate();
+    const { errorMessage, request } = useLoaderData();
+    const { state } = useLocation();
+    const message = (state && state.message) || errorMessage;
+    const redirectTo = state && state.redirectTo;
 
     const submit = async (userData) => {
-        const formData = new FormData();
-
-        Object.entries(userData).forEach(([key, value]) => formData.append(key, value));
-
-        console.log(userData);
-
+        // console.log(userData);
         // TO-DO: Call authentication api
-        // const response = await authenticate(userData);
+        const response = await authenticate(userData);
 
-        // if (!response.accessToken) {
-        //     setToastState({
-        //         title: response.error,
-        //         description: response.message,
-        //         status: 'error',
-        //         icon: <Icon as={BiError} />
-        //     });
+        if (!response.accessToken) {
+            setToastState({
+                title: response.error,
+                description: response.message,
+                status: 'error',
+                icon: <Icon as={BiError} />
+            });
 
-        //     return;
-        // }
+            return;
+        }
 
-        // login(response);
-        // const to = redirectTo || new URL(request.url).searchParams.get('redirectTo') || '/dashboard';
-        // // const to = '/dashboard';
-        // navigate(to, { replace: true });
+        login(response);
+        const to = redirectTo || new URL(request.url).searchParams.get('redirectTo') || '/dashboard';
+        // const to = '/dashboard';
+        navigate(to, { replace: true });
     };
 
     return (
@@ -71,10 +82,10 @@ const Login = () => {
                 >
                     <Logo />
 
-                    {/* {
+                    {
                         message &&
                         <Text fontSize='md' fontWeight='medium' px='3' py='2' bg='red.100' color='red.600'>{message}</Text>
-                    } */}
+                    }
 
                     <Heading fontSize='2xl' >Login</Heading>
 

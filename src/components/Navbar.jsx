@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
+import { RxAvatar } from "react-icons/rx";
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 import fatogLogo from '../assets/fatog-logo.png';
 import { menuLinks } from "../constants/data";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Modal from "./Modal";
 import ContactForm from "./ContactForm";
-import { Button, Stack } from '@chakra-ui/react';
+import { Button, Stack, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Avatar } from '@chakra-ui/react';
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const user = JSON.parse(sessionStorage.getItem('user')) || false;
+    const { logout } = useAuth()
 
     const openModal = () => {
         setIsOpen(true);
@@ -45,23 +50,36 @@ const Navbar = () => {
                     ))}
 
                     <Stack direction='row' spacing='3'>
-                        <Button as={Link} to='login' colorScheme='blue' size='sm' textTransform='uppercase'>Login</Button>
+                        {
+                            !user &&
+                            <>
+                                <Button as={Link} to='login' colorScheme='blue' size='sm' textTransform='uppercase'>Login</Button>
+                                <Button
+                                    colorScheme='blue'
+                                    textTransform='uppercase'
+                                    variant='outline'
+                                    onClick={openModal}
+                                    size='sm'
+                                >
+                                    Contact Us
+                                </Button>
+                            </>
+                        }
 
-                        <Button
-                            colorScheme='blue'
-                            textTransform='uppercase'
-                            variant='outline'
-                            onClick={openModal}
-                            size='sm'
-                        >
-                            Contact Us
-                        </Button>
 
-                        {/* <button
-                            onClick={openModal}
-                            className="hidden md:block rounded-md border-2 border-[#0e204d] px-4 py-[8px] text-xs font-semibold uppercase leading-normal text-[#1f3374] hover:text-white transition duration-150 ease-in-out bg-transparent hover:border-[#0e204d] hover:bg-[#0e204d] focus:outline-none dark:hover:bg-opacity-10">
-                            Contact Us
-                        </button> */}
+                        {
+                            user &&
+                            <Menu>
+                                <MenuButton>
+                                    <Avatar size="sm" />
+                                </MenuButton>
+                                <MenuList py='0'>
+                                    <MenuItem as={Link} icon={<RxAvatar />} to='/profile'>Profile</MenuItem>
+                                    <MenuDivider my='0' />
+                                    <MenuItem as={Link} icon={<RiLogoutCircleRLine />} onClick={() => logout()}>Logout</MenuItem>
+                                </MenuList>
+                            </Menu>
+                        }
 
                     </Stack>
 
