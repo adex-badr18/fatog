@@ -5,11 +5,11 @@ import { RxAvatar } from "react-icons/rx";
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import fatogLogo from '../assets/fatog-logo.png';
 import { menuLinks } from "../constants/data";
-import { Link, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Modal from "./Modal";
 import ContactForm from "./ContactForm";
-import { Button, Stack, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Avatar } from '@chakra-ui/react';
+import { Button, Stack, Menu, MenuButton, MenuList, MenuItem, MenuDivider, Avatar, Link } from '@chakra-ui/react';
 import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
@@ -66,7 +66,6 @@ const Navbar = () => {
                             </>
                         }
 
-
                         {
                             user &&
                             <Menu>
@@ -108,6 +107,52 @@ const Navbar = () => {
 
                             ))
                         }
+
+                        {
+                            !user &&
+                            <Link as={RouterLink}
+                                to='/login'
+                                color='#1d2a4d'
+                                mx='4'
+                                py='3'
+                                fontSize='sm'
+                                fontWeight='bold'
+                                textTransform='uppercase'
+                            >
+                                Login
+                            </Link>
+                        }
+
+                        {
+                            user &&
+                            <>
+                                <Link
+                                    as={RouterLink}
+                                    to='/login'
+                                    color='#1d2a4d'
+                                    mx='4'
+                                    py='3'
+                                    fontSize='sm'
+                                    fontWeight='bold'
+                                    textTransform='uppercase'
+                                >
+                                    Profile
+                                </Link>
+                                <Link
+                                    as={RouterLink}
+                                    onClick={() => logout()}
+                                    color='#1d2a4d'
+                                    mx='4'
+                                    py='3'
+                                    fontSize='sm'
+                                    fontWeight='bold'
+                                    textTransform='uppercase'
+                                >
+                                    Logout
+                                </Link>
+                            </>
+                        }
+
                     </div>
                 </div>
             )}
