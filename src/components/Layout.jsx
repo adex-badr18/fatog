@@ -9,7 +9,7 @@ const Layout = () => {
     return (
         <>
             <Navbar />
-            <Stack minH='30vh' bg='gray.50'>
+            <Stack minH='50vh' bg='gray.50'>
                 {
                     state === 'loading' ?
                         <Spinner
