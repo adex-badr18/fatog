@@ -37,7 +37,7 @@ export const authenticate = async (data) => {
 
 export async function createUser(userData) {
     const token = JSON.parse(sessionStorage.getItem('user'))?.accessToken;
-    const res = await fetch(`${BASE_URL}/users`, {
+    const res = await fetch(`${BASE_URL}/users/customer/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
