@@ -22,8 +22,7 @@ const columns = [
     { id: 'pricePerBag', header: 'Price(₦)' },
 ];
 
-export async function loader({ request }) {
-    await requireAuth(request);
+export async function loader() {
     const response = await getProducts();
 
     if (response.error || response.message) {
