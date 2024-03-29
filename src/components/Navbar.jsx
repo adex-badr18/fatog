@@ -3,6 +3,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { TbShoppingCartCog } from "react-icons/tb";
 import fatogLogo from '../assets/fatog-logo.png';
 import { menuLinks } from "../constants/data";
 import { Link as RouterLink, useLocation } from "react-router-dom";
@@ -53,7 +54,7 @@ const Navbar = () => {
                         {
                             !user &&
                             <>
-                                <Button as={Link} to='login' colorScheme='blue' size='sm' textTransform='uppercase'>Login</Button>
+                                <Button as={RouterLink} to='login' colorScheme='blue' size='sm' textTransform='uppercase'>Login</Button>
                                 <Button
                                     colorScheme='blue'
                                     textTransform='uppercase'
@@ -73,11 +74,11 @@ const Navbar = () => {
                                     <Avatar size="sm" />
                                 </MenuButton>
                                 <MenuList py='0'>
-                                    <MenuItem as={Link} icon={<RxAvatar />} to='/profile'>Profile</MenuItem>
+                                    <MenuItem as={RouterLink} icon={<RxAvatar />} to='/profile'>Profile</MenuItem>
                                     {/* <MenuDivider my='0' /> */}
-                                    <MenuItem as={Link} icon={<RxAvatar />} to='/orders'>My Orders</MenuItem>
+                                    <MenuItem as={RouterLink} icon={<TbShoppingCartCog />} to='/orders'>My Orders</MenuItem>
                                     <MenuDivider my='0' />
-                                    <MenuItem as={Link} icon={<RiLogoutCircleRLine />} onClick={() => logout()}>Logout</MenuItem>
+                                    <MenuItem as={RouterLink} icon={<RiLogoutCircleRLine />} onClick={() => logout()}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
                         }
