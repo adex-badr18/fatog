@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useLocation, useNavigate, useLoaderData } from 'react-router-dom';
+import { useLocation, useNavigate, Link as RouterLink, useLoaderData } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Stack, HStack, Flex, Box, Icon, IconButton, Spinner, Button, Heading, FormLabel, Text } from '@chakra-ui/react';
 import Breadcrumb from '../components/Breadcrumb';
@@ -64,7 +64,7 @@ const SignUp = () => {
 
             return;
         }
-        
+
         if (data.password !== data.confirmPassword) {
             setShowConfirmHelper(true);
             setToastState({
@@ -122,15 +122,15 @@ const SignUp = () => {
 
     return (
         <Stack spacing='6'>
-            <Stack direction={{ base: 'column', sm: 'row' }} justifyContent='space-between' alignItems='center'>
+            <Stack direction={{ base: 'column', sm: 'row' }} justifyContent='space-between' alignItems={{base: 'start', sm: 'center'}}>
                 <Breadcrumb linkList={breadcrumbData} />
                 <Back />
             </Stack>
-            <HStack justifyContent='space-between'>
-                <Heading fontSize='3xl' color='blue.700'>Create Account</Heading>
-            </HStack>
             <form onSubmit={handleSubmit(submitUser)}>
-                <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md' bg='white'>
+                <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md' bg='white' w={['90%', '90%', '80%', '80%', '50%']} mx='auto'>
+                    <HStack justifyContent='space-between' mb='2'>
+                        <Heading fontSize='3xl' color='blue.700'>Create Account</Heading>
+                    </HStack>
                     <TextInput
                         name='email'
                         label='Email'
@@ -181,6 +181,8 @@ const SignUp = () => {
                     >
                         Create Account
                     </Button>
+
+                    <Button as={RouterLink} to='/login' fontSize='sm' variant='link' alignSelf='start'>Already created an account? Login</Button>
                 </Stack>
             </form>
         </Stack>

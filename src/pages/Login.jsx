@@ -30,7 +30,6 @@ const Login = () => {
     const redirectTo = state && state.redirectTo;
 
     const submit = async (userData) => {
-        // console.log(userData);
         // TO-DO: Call authentication api
         const response = await authenticate(userData);
 
@@ -59,13 +58,8 @@ const Login = () => {
             alignItems='center'
             // minHeight='100vh'
             py='8'
-            bg='gray.100'
-            // bgImage={`linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${bgImage})`}
-            // backgroundRepeat='no-repeat'
-            // backgroundSize='cover'
-            boxShadow='lg'
         >
-            <Flex w={['90%', '90%', '80%', '80%', '60%']} borderRadius='md' overflow='hidden'>
+            <Flex w={['90%', '90%', '80%', '80%', '60%']} borderRadius='md' overflow='hidden' boxShadow='lg'>
                 <Box
                     display={['none', 'none', 'block']} w='55%'
                     bgImage={bgImage}
