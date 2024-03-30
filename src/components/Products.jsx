@@ -1,6 +1,6 @@
 import React from 'react';
 import { productsData } from '../constants/data';
-import {Button} from '@chakra-ui/react';
+import { Button, Text, Heading, SimpleGrid, Image, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const Products = () => {
@@ -14,16 +14,16 @@ const Products = () => {
 
                     <h1 className='md:hidden text-base text-gray-300 font-medium mt-6'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
 
-                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'gray.100'}} display={{base: 'flex', md: 'none'}}>View available feeds</Button>
+                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{ bg: '#13c5dd', color: 'gray.100' }} display={{ base: 'flex', md: 'none' }}>View available feeds</Button>
                 </div>
                 <div className="hidden md:flex flex-col justify-center items-center p-8 md:p-16 w-full flex-1">
                     <h1 className='text-base text-gray-500 font-medium'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
 
-                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'white'}} display={{base: 'none', md: 'flex'}}>View available products</Button>
+                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{ bg: '#13c5dd', color: 'white' }} display={{ base: 'none', md: 'flex' }}>View available products</Button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {
                     productsData.map((product, index) => (
                         <div
@@ -46,7 +46,46 @@ const Products = () => {
                         </div>
                     ))
                 }
-            </div>
+            </div> */}
+
+            <SimpleGrid spacing={6} templateColumns='repeat(auto-fit, minmax(200px, 1fr))'>
+                {
+                    productsData.map((product, index) => (
+                        <Card maxW='md' key={index}>
+                            <CardHeader>
+                                <Heading fontSize='lg'>
+                                    {product.title}
+                                </Heading>
+                            </CardHeader>
+                            <Image
+                                objectFit='cover'
+                                src={product.img}
+                                alt={product.title}
+                            />
+                            <CardBody>
+                                <Text>{product.desc}</Text>
+                            </CardBody>
+
+                            <CardFooter
+                                borderTopWidth='1px'
+                                justify='center'
+                                py='3'
+                            >
+                                {
+                                    product.buttonText &&
+                                    <Button
+                                        as={Link}
+                                        to={product.ref}
+                                        variant='link'
+                                    >
+                                        {product.buttonText}
+                                    </Button>
+                                }
+                            </CardFooter>
+                        </Card>
+                    ))
+                }
+            </SimpleGrid>
         </section>
     )
 }

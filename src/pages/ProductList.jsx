@@ -23,6 +23,8 @@ const columns = [
 ];
 
 export async function loader() {
+    globalThis.scrollTo({ top: 0, left: 0});
+    
     const response = await getProducts();
 
     if (response.error || response.message) {

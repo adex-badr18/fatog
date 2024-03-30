@@ -65,22 +65,30 @@ export const productsData = [
     {
         img: productImage1,
         title: 'Young Catfish',
-        desc: 'Fingerlings, post-fingerlins, and jumbo are all available for sales.'
+        desc: 'Fingerlings, post-fingerlins, and jumbo are all available for sales.',
+        buttonText: 'View',
+        ref: ''
     },
     {
         img: productImage2,
         title: 'Catfish',
-        desc: 'Medium-size and Table-size catfish are also available for sales.'
+        desc: 'Medium-size and Table-size catfish are also available for sales.',
+        buttonText: 'View',
+        ref: ''
     },
     {
         img: productImage3,
         title: 'Processed Catfish',
-        desc: 'We also offer processed and packaged oven-dried catfish'
+        desc: 'We also offer processed and packaged oven-dried catfish',
+        buttonText: 'View',
+        ref: ''
     },
     {
         img: productImage4,
         title: 'Fish Feeds',
-        desc: 'Purchase our well-formulated feeds to ensure a rapid growth of your fish.'
+        desc: 'Purchase our well-formulated feeds to ensure a rapid growth of your fish.',
+        buttonText: 'View available feeds',
+        ref: '/products'
     },
 ];
 
