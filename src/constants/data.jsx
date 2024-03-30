@@ -12,12 +12,12 @@ import productImage2 from '../assets/table-sized.jpg';
 import productImage3 from '../assets/dry-fish.jpg';
 import productImage4 from '../assets/fish-feeds.webp';
 
-
+const user = JSON.parse(sessionStorage.getItem('user')) || false;
 
 export const menuLinks = [
-    { id: 1, name: 'Home', link: '/' },
-    { id: 2, name: 'About', link: '/#about' },
-    { id: 3, name: 'Products', link: '/#products' },
+    { id: 1, name: user ? 'Dashboard' : 'Home', link: user ? '/dashboard' : '/' },
+    { id: 2, name: 'About', link: '/#about', linkType: 'anchor' },
+    { id: 3, name: 'Products', link: user ? '/products' : '/#products' },
     { id: 4, name: 'Services', link: '/#services' },
 ];
 

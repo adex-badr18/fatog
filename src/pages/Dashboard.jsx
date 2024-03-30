@@ -14,7 +14,7 @@ const Dashboard = () => {
     const user = useLoaderData();
 
     return (
-        <Box p='5'>Customer Dashboard</Box>
+        <Box>Customer Dashboard</Box>
     )
 }
 

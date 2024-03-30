@@ -76,10 +76,14 @@ const ProductList = () => {
         }
     }, []);
 
+    useEffect(() => {
+        globalThis.scrollTo({ top: 0, left: 0});
+    }, []);
+
     return (
         error.error || error.message ?
             <FetchError error={error} /> :
-            <Stack spacing='6' p='6'>
+            <Stack spacing='6'>
                 <Box>
                     <Breadcrumb linkList={breadcrumbData} />
                 </Box>

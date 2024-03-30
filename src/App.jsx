@@ -19,8 +19,19 @@ import { loader as DashboardLoader } from "./pages/Dashboard";
 import OrderCreate from "./pages/orders/OrderCreate";
 import { loader as OrderCreateLoader } from "./pages/orders/OrderCreate";
 import Orders from "./pages/orders/Orders";
+import { loader as OrdersLoader } from "./pages/orders/Orders";
 import OrderList from "./pages/orders/OrderList";
+import { loader as OrderListLoader } from "./pages/orders/OrderList";
 import OrderItem from "./pages/orders/OrderItem";
+import { loader as OrderItemloader } from "./pages/orders/OrderItem";
+import OrderSuccess from "./pages/orders/OrderSuccess";
+import OrderItemUpdate from "./pages/orders/OrderItemUpdate";
+import { loader as OrderItemUpdateLoader } from "./pages/orders/OrderItemUpdate";
+import ProfileView from "./pages/customers/ProfileView";
+import { loader as ProfileViewLoader } from "./pages/customers/ProfileView";
+import ProfileForm from "./pages/customers/ProfileForm";
+import ChangePassword from "./pages/customers/ChangePassword";
+import Error from "./components/Error";
 
 async function loader({ request }) {
     await requireAuth(request);
@@ -28,7 +39,7 @@ async function loader({ request }) {
 }
 
 const router = createBrowserRouter(createRoutesFromChildren(
-    <Route path='/' element={<Layout />}>
+    <Route path='/' element={<Layout />} errorElement={<Error />}>
         <Route index element={<Landing />} />
         <Route path='login' element={<Login />} loader={LoginLoader} />
         <Route path='signup' element={<SignUp />} />
@@ -36,10 +47,16 @@ const router = createBrowserRouter(createRoutesFromChildren(
 
         <Route path='products' element={<ProductList />} loader={ProductListLoader} />
 
+        <Route path='profile' element={<ProfileView />} loader={ProfileViewLoader} />
+        <Route path='profile/update' element={<ProfileForm />} loader={loader} />
+        <Route path='profile/change-password' element={<ChangePassword />} loader={loader} />
+
         <Route path='order/create' element={<OrderCreate />} loader={OrderCreateLoader} />
-        <Route path='orders' element={<Orders />} />
-        <Route path='orders/:id' element={<OrderList />} />
-        <Route path='orders/:id/orderlist/:id' element={<OrderItem />} />
+        <Route path='orders' element={<Orders />} loader={OrdersLoader} />
+        <Route path='orders/success' element={<OrderSuccess />} />
+        <Route path='orders/:id' element={<OrderList />} loader={OrderListLoader} />
+        <Route path='orders/:id/orderlist/:id' element={<OrderItem />} loader={OrderItemloader} />
+        <Route path='orders/:id/orderlist/:id/edit' loader={OrderItemUpdateLoader} element={<OrderItemUpdate />} />
 
         <Route path='dashboard' element={<Dashboard />} loader={DashboardLoader} />
 
