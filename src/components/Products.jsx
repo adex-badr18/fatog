@@ -14,7 +14,7 @@ const Products = () => {
 
                     <h1 className='md:hidden text-base text-gray-300 font-medium mt-6'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>
 
-                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'gray.100'}} display={{base: 'flex', md: 'none'}}>View available products</Button>
+                    <Button as={Link} to='products' variant='outline' borderColor='#13c5dd' color='#13c5dd' alignSelf='start' mt='6' _hover={{bg: '#13c5dd', color: 'gray.100'}} display={{base: 'flex', md: 'none'}}>View available feeds</Button>
                 </div>
                 <div className="hidden md:flex flex-col justify-center items-center p-8 md:p-16 w-full flex-1">
                     <h1 className='text-base text-gray-500 font-medium'>At FATOG, we offer quality aqua products that meets our customer's needs, ranging from fingerlings, post-fingerlins, and jumbo to processed oven-dried fish.</h1>

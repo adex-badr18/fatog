@@ -1,24 +1,32 @@
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate, useLoaderData } from 'react-router-dom';
+import TextInput from '../../components/TextInput';
 import { useForm } from 'react-hook-form';
 import { Stack, HStack, Flex, Box, Icon, IconButton, Spinner, Button, Heading, FormLabel, Text } from '@chakra-ui/react';
-import Breadcrumb from '../components/Breadcrumb';
-import TextInput from '../components/TextInput';
-import Back from '../components/Back';
-import { createUser } from '../api/users';
-import { useToastHook } from '../hooks/useToast';
-import { isUnauthorized } from '../utils';
+import Breadcrumb from '../../components/Breadcrumb';
+import SelectElement from '../../components/SelectElement';
+import { changePassword } from '../../api/users';
+import { requireAuth } from '../../hooks/useAuth';
+import { useToastHook } from '../../hooks/useToast';
+import useAuth from '../../hooks/useAuth';
 import { BiError } from "react-icons/bi";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { MdOutlineSyncLock } from "react-icons/md";
+import { isUnauthorized } from '../../utils';
+import Back from '../../components/Back';
 
-const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const breadcrumbData = [
+    { name: 'Home', ref: '/dashboard' },
+    { name: 'Profile', ref: '/profile' },
+    { name: 'Password Update', ref: '/profile/change-password' },
+];
+
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,16}$/;
 
-const SignUp = () => {
+const ChangePassword = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
-    const emailRef = useRef(null);
+    const { user } = useAuth();
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
     const [showPasswordHelper, setShowPasswordHelper] = useState(false);
@@ -28,30 +36,12 @@ const SignUp = () => {
         handleSubmit,
         control,
         formState: { isSubmitting },
-        setValue,
     } = useForm();
 
-    const breadcrumbData = [
-        { name: 'Home', ref: '/dashboard' },
-        { name: 'Sign Up', ref: '/signup' },
-    ];
-
-    const submitUser = async (data) => {
-        const emailValidation = EMAIL_REGEX.test(data.email);
+    const passwordChange = async (data) => {
         const passwordValidation = PWD_REGEX.test(data.password);
         setShowConfirmHelper(false);
         setShowPasswordHelper(false);
-
-        if (!emailValidation) {
-            setToastState({
-                title: 'Invalid Email Address!',
-                description: 'Please enter a valid email address.',
-                status: 'error',
-                icon: <Icon as={BiError} />
-            });
-
-            return;
-        }
 
         if (!passwordValidation) {
             setShowPasswordHelper(true);
@@ -64,12 +54,12 @@ const SignUp = () => {
 
             return;
         }
-        
+
         if (data.password !== data.confirmPassword) {
             setShowConfirmHelper(true);
             setToastState({
                 title: 'Password Mismatch',
-                description: 'Password and Confirm password must match.',
+                description: 'New password and Confirm password must match.',
                 status: 'error',
                 icon: <Icon as={BiError} />
             });
@@ -77,19 +67,14 @@ const SignUp = () => {
             return;
         }
 
-        const userData = {
-            email: data.email,
-            role: 'customer',
-            category: 'customer',
-            active: true,
+        const passwordData = {
             password: data.password
         };
 
-        // TODO: Consume create user API endpoint
         try {
-            const response = await createUser(userData);
+            const response = await changePassword(passwordData);
 
-            if (response.error || response.message) {
+            if (response.error) {
                 setToastState({
                     title: response.error,
                     description: response.message,
@@ -106,13 +91,13 @@ const SignUp = () => {
 
             setToastState({
                 title: 'Success!',
-                description: 'Your account has been created successfully.',
+                description: 'Password changed successfully',
                 status: 'success',
                 icon: <Icon as={FaRegThumbsUp} />
             });
 
             setTimeout(() => {
-                navigate('/login');
+                navigate(`/profile`);
             }, 6000);
 
         } catch (error) {
@@ -127,20 +112,12 @@ const SignUp = () => {
                 <Back />
             </Stack>
             <HStack justifyContent='space-between'>
-                <Heading fontSize='3xl' color='blue.700'>Create Account</Heading>
+                <Heading fontSize='3xl' color='blue.700'>Update Password</Heading>
             </HStack>
-            <form onSubmit={handleSubmit(submitUser)}>
-                <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md' bg='white'>
-                    <TextInput
-                        name='email'
-                        label='Email'
-                        control={control}
-                        type='email'
-                        fieldRef={emailRef}
-                        defaultVal=''
-                    />
 
-                    <TextInput
+            <form onSubmit={handleSubmit(passwordChange)}>
+                <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md'>
+                <TextInput
                         name='password'
                         label='Password'
                         control={control}
@@ -167,10 +144,10 @@ const SignUp = () => {
                     <Button
                         type='submit'
                         colorScheme='blue'
-                        mt='4'
                         isLoading={isSubmitting ? true : false}
-                        loadingText='Submitting...'
+                        loadingText='Updating...'
                         spinnerPlacement='end'
+                        mt='4'
                         spinner={<Spinner
                             thickness='4px'
                             speed='0.5s'
@@ -179,7 +156,7 @@ const SignUp = () => {
                             size='md'
                         />}
                     >
-                        Create Account
+                        Change Password
                     </Button>
                 </Stack>
             </form>
@@ -187,4 +164,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default ChangePassword;
