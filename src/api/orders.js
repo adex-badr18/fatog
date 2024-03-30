@@ -23,7 +23,7 @@ export async function createOrder(orderData) {
 }
 
 export async function createOrderAnonymous(orderData) {
-    const res = await fetch(`${BASE_URL}/order-lists`, {
+    const res = await fetch(`${BASE_URL}/order-lists/anonymous`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export async function createOrderAnonymous(orderData) {
 
 export async function getOrders() {
     const token = JSON.parse(sessionStorage.getItem('user'))?.accessToken;
-    const res = await fetch(`${BASE_URL}${endpoint}`, {
+    const res = await fetch(`${BASE_URL}/customer/profile`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

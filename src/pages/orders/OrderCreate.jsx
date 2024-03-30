@@ -56,6 +56,9 @@ const OrderCreate = () => {
     const [totalNoOfBags, setTotalNoOfBags] = useState(0);
     const [totalWeight, setTotalWeight] = useState(0);
     const [shippingForm, setShippingForm] = useState({
+        firstName: '',
+        lastName: '',
+        gender: '',
         phoneNumber: '',
         shippingAddress: '',
         note: ''
@@ -229,7 +232,7 @@ const OrderCreate = () => {
             return;
         }
 
-        if (!shippingForm.phoneNumber || !shippingForm.shippingAddress) {
+        if (!shippingForm.phoneNumber || !shippingForm.shippingAddress || !shippingForm.firstName || !shippingForm.lastName || !shippingForm.gender) {
             setToastState({
                 title: 'Missing field(s)',
                 description: 'Please fill all required fields.',
@@ -241,50 +244,101 @@ const OrderCreate = () => {
             return;
         }
 
-        const orderListData = {
-            data: [...orderList],
-            phoneNumber: shippingForm.phoneNumber,
-            shippingAddress: shippingForm.shippingAddress,
-            note: shippingForm.note,
-        }
 
         // console.log(orderListData)
+        if (user) {
+            const orderListData = {
+                data: [...orderList],
+                phoneNumber: shippingForm.phoneNumber,
+                shippingAddress: shippingForm.shippingAddress,
+                note: shippingForm.note,
+            }
+            console.log(orderListData);
+            // TODO: Consume create order list API endpoint
+            try {
+                const response = await createOrder(orderListData);
 
-        // TODO: Consume create order list API endpoint
-        try {
-            const response = await user ? createOrder(orderListData) : createOrderAnonymous(orderListData);
+                if (response.error || response.message) {
+                    setIsSubmitting(false);
+                    setToastState({
+                        title: response.error,
+                        description: response.message,
+                        status: 'error',
+                        icon: <Icon as={BiError} />
+                    });
 
-            if (response.error || response.message) {
-                setIsSubmitting(false);
+                    setTimeout(() => {
+                        isUnauthorized(response, navigate, pathname);
+                    }, 6000);
+
+                    return response.error;
+                }
+
                 setToastState({
-                    title: response.error,
-                    description: response.message,
-                    status: 'error',
-                    icon: <Icon as={BiError} />
+                    title: 'Success!',
+                    description: 'Order created successfully',
+                    status: 'success',
+                    icon: <Icon as={FaRegThumbsUp} />
                 });
 
+                setIsSubmitting(false);
+
                 setTimeout(() => {
-                    isUnauthorized(response, navigate, pathname);
+                    navigate(`/orders/success`, { state: { order: response } });
                 }, 6000);
 
-                return response.error;
+            } catch (error) {
+                return error;
             }
+        } else {
+            const orderListData = {
+                data: [...orderList],
+                phoneNumber: shippingForm.phoneNumber,
+                shippingAddress: shippingForm.shippingAddress,
+                note: shippingForm.note,
+                firstName: shippingForm.firstName,
+                lastName: shippingForm.lastName,
+                gender: shippingForm.gender,
+            }
+            
+            // TODO: Consume create order list API endpoint
+            try {
+                const response = await createOrderAnonymous(orderListData);
 
-            setToastState({
-                title: 'Success!',
-                description: 'Order created successfully',
-                status: 'success',
-                icon: <Icon as={FaRegThumbsUp} />
-            });
+                if (response.error || response.message) {
+                    setIsSubmitting(false);
+                    setToastState({
+                        title: response.error,
+                        description: response.message,
+                        status: 'error',
+                        icon: <Icon as={BiError} />
+                    });
 
-            setIsSubmitting(false);
+                    setTimeout(() => {
+                        isUnauthorized(response, navigate, pathname);
+                    }, 6000);
 
-            setTimeout(() => {
-                navigate(`/orders`);
-            }, 6000);
+                    return response.error;
+                }
 
-        } catch (error) {
-            return error;
+                setToastState({
+                    title: 'Success!',
+                    description: 'Order created successfully',
+                    status: 'success',
+                    icon: <Icon as={FaRegThumbsUp} />
+                });
+
+                console.log(response);
+
+                setIsSubmitting(false);
+
+                setTimeout(() => {
+                    navigate(`/orders/success`, { state: { order: response } });
+                }, 6000);
+
+            } catch (error) {
+                return error;
+            }
         }
     }
 
@@ -355,8 +409,8 @@ const OrderCreate = () => {
     return (
         error.error || error.message ?
             <FetchError error={error} /> :
-            <Stack spacing='6' p='6'>
-                <Stack direction={{base: 'column', sm: 'row'}} justifyContent='space-between' alignItems='center'>
+            <Stack spacing='6'>
+                <Stack direction={{ base: 'column', sm: 'row' }} justifyContent='space-between' alignItems='center'>
                     <Breadcrumb linkList={breadcrumbData} />
                     <Back />
                 </Stack>
@@ -424,6 +478,7 @@ const OrderCreate = () => {
 }
 
 const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) => {
+    const user = JSON.parse(sessionStorage.getItem('user')) || false;
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -435,6 +490,35 @@ const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) =
 
     return (
         <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md'>
+            {
+                !user &&
+                <Flex gap={{ base: '4', md: '6' }} direction={{ base: 'column', sm: 'row' }}>
+                    <FormControl>
+                        <FormLabel htmlFor='firstName'>First Name</FormLabel>
+                        <Input
+                            id='firstName'
+                            name='firstName'
+                            value={shippingForm.firstName}
+                            onChange={handleChange}
+                            type='text'
+                            placeholder='First Name'
+                            required
+                        />
+                    </FormControl>
+
+                    <FormControl>
+                        <FormLabel htmlFor='lastName'>Last Name</FormLabel>
+                        <Input
+                            id='lastName'
+                            name='lastName'
+                            value={shippingForm.lastName}
+                            onChange={handleChange}
+                            placeholder='Last Name'
+                            required
+                        />
+                    </FormControl>
+                </Flex>
+            }
             <Flex gap={{ base: '4', md: '6' }} direction={{ base: 'column', sm: 'row' }}>
                 <FormControl>
                     <FormLabel htmlFor='phoneNumber'>Phone Number</FormLabel>
@@ -449,6 +533,25 @@ const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) =
                     />
                 </FormControl>
 
+                {
+                    !user &&
+                    <FormControl>
+                        <FormLabel htmlFor='gender'>Gender</FormLabel>
+                        <Select
+                            id='gender'
+                            name='gender'
+                            value={shippingForm.gender}
+                            onChange={handleChange}
+                        >
+                            <option value=''>Select Gender</option>
+                            <option value='female'>Female</option>
+                            <option value='male'>Male</option>
+                        </Select>
+                    </FormControl>
+                }
+            </Flex>
+
+            <Flex gap={{ base: '4', md: '6' }} direction={{ base: 'column', sm: 'row' }}>
                 <FormControl>
                     <FormLabel htmlFor='shippingAddress'>Shipping Address</FormLabel>
                     <Input
@@ -460,18 +563,18 @@ const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) =
                         required
                     />
                 </FormControl>
-            </Flex>
 
-            <FormControl>
-                <FormLabel htmlFor='note'>Note</FormLabel>
-                <Textarea
-                    id='note'
-                    name='note'
-                    value={shippingForm.note}
-                    onChange={handleChange}
-                    placeholder='Note'
-                />
-            </FormControl>
+                <FormControl>
+                    <FormLabel htmlFor='note'>Note</FormLabel>
+                    <Textarea
+                        id='note'
+                        name='note'
+                        value={shippingForm.note}
+                        onChange={handleChange}
+                        placeholder='Note'
+                    />
+                </FormControl>
+            </Flex>
 
             <Button
                 w='full'
@@ -496,7 +599,7 @@ const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) =
 
 const OrderItem = ({ orderItem, products, deleteOrderItem, showUpdateOrderItemForm }) => {
     const product = products.filter(prod => prod.refId === orderItem.productRefId)[0];
-    
+
     return (
         <Card >
             <CardHeader borderBottomWidth='1px' px='3' py='2'>
