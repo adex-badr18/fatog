@@ -1,15 +1,20 @@
+import { useEffect } from "react";
 import { Outlet, useNavigation } from "react-router-dom";
 import { Spinner, Stack } from '@chakra-ui/react';
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import ScrollToTop from "./ScrollToTop";
 
 const Layout = () => {
     const { state } = useNavigation();
+
+    useEffect(() => {
+        globalThis.scrollTo({ top: 0, left: 0});
+    }, []);
+
     return (
         <>
             <Navbar />
-            <Stack minH='50vh' bg='gray.50'>
+            <Stack minH='50vh' bg='gray.50' p='6'>
                 {
                     state === 'loading' ?
                         <Spinner
@@ -23,7 +28,6 @@ const Layout = () => {
                         <Outlet />
                 }
             </Stack>
-            <ScrollToTop />
             <Footer />
         </>
     )

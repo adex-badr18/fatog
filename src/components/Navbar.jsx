@@ -6,7 +6,7 @@ import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { TbShoppingCartCog } from "react-icons/tb";
 import fatogLogo from '../assets/fatog-logo.png';
 import { menuLinks } from "../constants/data";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink, NavLink as RouterNavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Modal from "./Modal";
 import ContactForm from "./ContactForm";
@@ -17,7 +17,8 @@ const Navbar = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const user = JSON.parse(sessionStorage.getItem('user')) || false;
-    const { logout } = useAuth()
+    const { logout } = useAuth();
+    const { pathname } = useLocation();
 
     const openModal = () => {
         setIsOpen(true);
@@ -176,26 +177,53 @@ const Navbar = () => {
 };
 
 const NavLink = ({ to, children }) => {
-    const { hash } = useLocation();
+    const { hash, pathname } = useLocation();
+    const active = hash.includes(to);
+
+    // console.log(hash, to, pathname, active)
 
     return (
-        <a href={to} className={clsx("text-[#1d2a4d] hover:text-blue-400 font-bold uppercase text-base py-1 hover:border-b-2 border-blue-400", { 'text-blue-400 border-b-2 border-blue-400 transition-all duration-300': hash.includes(to) })}>
+        <Link
+            as={RouterNavLink}
+            to={to}
+            color={active ? 'blue.400' : '#1d2a4d'}
+            borderBottom={active && '2px'}
+            borderBottomColor={active && 'blue.400'}
+            fontSize='sm'
+            fontWeight='bold'
+            textTransform='uppercase'
+            py='1'
+            _hover={{ borderBottomWidth: '2px', borderBottomColor: 'blue.400', color: 'blue.400' }}
+            style={({isActive}) => ({
+                color: isActive ? 'blue.400' : '#1d2a4d',
+                borderBottom: isActive ? '2px' : '0',
+                borderBottomColor: isActive && 'blue.400',
+            })}
+        >
             {children}
-        </a>
+        </Link>
     );
 };
 
 const MobileNavLink = ({ to, children, handleClick }) => {
-    const { hash } = useLocation();
+    const { hash, pathname } = useLocation();
+    const active = pathname.includes(to) || hash.includes(to);
 
     return (
-        <a
-            href={to}
-            className={clsx("text-[#1d2a4d] text-sm font-bold uppercase mx-4 py-3 transition duration-300", { 'text-blue-400': hash.includes(to) })}
+        <Link
+            as={RouterLink}
+            to={to}
+            color={active ? 'blue.400' : '#1d2a4d'}
+            fontSize='sm'
+            fontWeight='bold'
+            textTransform='uppercase'
+            py='3'
+            mx='4'
             onClick={handleClick}
+            _hover={{ borderBottomWidth: '2px', borderBottomColor: 'blue.400', color: 'blue.400' }}
         >
             {children}
-        </a>
+        </Link>
     );
 };
 
