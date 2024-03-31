@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { authenticate } from "../api/users";
 import { useToastHook } from "../hooks/useToast";
 import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 export async function loader({ request }) {
     const error = new URL(request.url).searchParams.get('message')
@@ -25,8 +26,9 @@ const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const { errorMessage, request } = useLoaderData();
+    const [loginError, setLoginError] = useState('');
     const { state } = useLocation();
-    const message = (state && state.message) || errorMessage;
+    const message = (state && state.message) || errorMessage || loginError;
     const redirectTo = state && state.redirectTo;
 
     const submit = async (userData) => {
@@ -44,6 +46,19 @@ const Login = () => {
             return;
         }
 
+        if (response.user.category === 'staff') {
+            setToastState({
+                title: 'Unauthorized!',
+                description: 'You are not authorized to login here.',
+                status: 'error',
+                icon: <Icon as={BiError} />
+            });
+
+            setLoginError('You are not authorized to login here.');
+
+            return;
+        }
+
         login(response);
         const to = redirectTo || new URL(request.url).searchParams.get('redirectTo') || '/dashboard';
         // const to = '/dashboard';
@@ -56,7 +71,7 @@ const Login = () => {
             w='100%'
             justifyContent='center'
             alignItems='center'
-            // minHeight='100vh'
+            minHeight='100vh'
             py='8'
         >
             <Flex w={['90%', '90%', '80%', '80%', '60%']} borderRadius='md' overflow='hidden' boxShadow='lg'>
