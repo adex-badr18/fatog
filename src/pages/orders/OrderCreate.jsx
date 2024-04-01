@@ -409,7 +409,7 @@ const OrderCreate = () => {
     return (
         error.error || error.message ?
             <FetchError error={error} /> :
-            <Stack spacing='6'>
+            <Stack spacing='6' p='6'>
                 <Stack direction={{ base: 'column', sm: 'row' }} justifyContent='space-between' alignItems='center'>
                     <Breadcrumb linkList={breadcrumbData} />
                     <Back />

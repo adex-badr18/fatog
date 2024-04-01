@@ -85,7 +85,7 @@ const ProductList = () => {
     return (
         error.error || error.message ?
             <FetchError error={error} /> :
-            <Stack spacing='6'>
+            <Stack spacing='6' p='6'>
                 <Box>
                     <Breadcrumb linkList={breadcrumbData} />
                 </Box>

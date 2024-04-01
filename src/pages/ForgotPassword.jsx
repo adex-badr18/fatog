@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { Stack } from '@chakra-ui/react';
 
 const ForgotPassword = () => {
     return (
-        <div>ForgotPassword</div>
+        <Stack p='6'>ForgotPassword</Stack>
     )
 }
 
