@@ -38,7 +38,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-white px-4 py-2">
-            <div className="container flex justify-between items-center">
+            <div className="flex justify-between items-center">
                 <div className="flex items-center">
                     <img src={fatogLogo} className='w-16' alt="FATOG Logo" />
                     <Link to="/" className="flex flex-col items-center text-[#1d2a4d] font-bold">
