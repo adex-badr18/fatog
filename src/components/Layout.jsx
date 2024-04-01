@@ -8,7 +8,7 @@ const Layout = () => {
     const { state } = useNavigation();
 
     useEffect(() => {
-        globalThis.scrollTo({ top: 0, left: 0});
+        globalThis.scrollTo({ top: 0, left: 0 });
     }, []);
 
     return (
@@ -24,6 +24,7 @@ const Layout = () => {
                             color='blue.300'
                             size='xl'
                             alignSelf='center'
+                            mt='6'
                         /> :
                         <Outlet />
                 }

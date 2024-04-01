@@ -5,7 +5,7 @@ import { RxAvatar } from "react-icons/rx";
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { TbShoppingCartCog } from "react-icons/tb";
 import fatogLogo from '../assets/fatog-logo.png';
-import { menuLinks } from "../constants/data";
+// import { menuLinks } from "../constants/data";
 import { Link as RouterLink, NavLink as RouterNavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import Modal from "./Modal";
@@ -19,6 +19,13 @@ const Navbar = () => {
     const user = JSON.parse(sessionStorage.getItem('user')) || false;
     const { logout } = useAuth();
     const { pathname } = useLocation();
+
+    const menuLinks = [
+        { id: 1, name: user ? 'Dashboard' : 'Home', link: user ? '/dashboard' : '/' },
+        { id: 2, name: 'About', link: '/#about', linkType: 'anchor' },
+        { id: 3, name: 'Products', link: user ? '/products' : '/#products' },
+        { id: 4, name: 'Services', link: '/#services' },
+    ];
 
     const openModal = () => {
         setIsOpen(true);
