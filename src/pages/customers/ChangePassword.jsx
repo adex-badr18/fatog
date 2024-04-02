@@ -117,9 +117,9 @@ const ChangePassword = () => {
 
             <form onSubmit={handleSubmit(passwordChange)}>
                 <Stack spacing='4' p='6' borderWidth='1px' borderColor='gray.200' borderRadius='md'>
-                <TextInput
+                    <TextInput
                         name='password'
-                        label='Password'
+                        label='New Password'
                         control={control}
                         type='password'
                         fieldRef={passwordRef}
@@ -132,7 +132,7 @@ const ChangePassword = () => {
 
                     <TextInput
                         name='confirmPassword'
-                        label='Confirm Password'
+                        label='Confirm New Password'
                         control={control}
                         type='password'
                         fieldRef={confirmPasswordRef}
