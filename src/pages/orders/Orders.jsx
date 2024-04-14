@@ -24,7 +24,7 @@ import {
 } from '@chakra-ui/react';
 import { IoEyeOutline } from 'react-icons/io5';
 import { BiError } from 'react-icons/bi';
-import { MdOutlineCreateNewFolder } from 'react-icons/md';
+import { MdOutlineCreateNewFolder, MdOutlineAddShoppingCart } from 'react-icons/md';
 import { FaEllipsisVertical, FaMoneyBill } from 'react-icons/fa6';
 import Breadcrumb from '../../components/Breadcrumb';
 import { EmptySearch } from '../../components/EmptySearch';
@@ -167,8 +167,6 @@ const Orders = () => {
 		statusCode: orders.statusCode ?? '',
 	});
 
-	// console.log(orders);
-
 	useEffect(() => {
 		if (error.error || error.message) {
 			setToastState({
@@ -195,13 +193,13 @@ const Orders = () => {
 				<Heading fontSize='3xl' color='blue.700'>
 					Orders
 				</Heading>
-				<Button
+                <Button
 					as={RouterLink}
-					to='create'
+					to='/order/create'
 					colorScheme='blue'
-					leftIcon={<MdOutlineCreateNewFolder />}
+					leftIcon={<MdOutlineAddShoppingCart />}
 				>
-					Create Order
+					Place an Order
 				</Button>
 			</HStack>
 			<Box marginTop='8'>
@@ -231,36 +229,5 @@ const Orders = () => {
 		</Stack>
 	);
 };
-
-// const ActionButtons = ({ order }) => {
-// 	const navigate = useNavigate();
-
-// 	function viewOrder(e) {
-// 		e.preventDefault();
-
-// 		const dataOrderId = e.currentTarget.getAttribute('data-order-id');
-// 		navigate(`./${dataOrderId}`);
-// 	}
-
-// 	return (
-// 		<Menu>
-// 			<MenuButton
-// 				as={IconButton}
-// 				aria-label='Options'
-// 				icon={<FaEllipsisVertical />}
-// 				variant='unstyled'
-// 			/>
-// 			<MenuList py='0'>
-// 				<MenuItem
-// 					icon={<IoEyeOutline />}
-// 					data-order-id={order.id}
-// 					onClick={viewOrder}
-// 				>
-// 					Preview
-// 				</MenuItem>
-// 			</MenuList>
-// 		</Menu>
-// 	);
-// };
 
 export default Orders;

@@ -53,6 +53,7 @@ import { getMonetaryValue, formatDate } from '../../utils';
 export async function loader({ params, request }) {
 	await requireAuth(request);
 	const response = await getOrderList(params.id);
+    // console.log(response)
 
 	if (response.error || response.message) {
 		return {
@@ -62,7 +63,7 @@ export async function loader({ params, request }) {
 		};
 	}
 
-	console.log(response);
+	// console.log(response);
 
 	const data = {
 		id: response.id,
