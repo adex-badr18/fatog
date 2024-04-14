@@ -551,7 +551,7 @@ const ShippingForm = ({ setShippingForm, shippingForm, submit, isSubmitting }) =
                 }
             </Flex>
 
-            <Flex gap={{ base: '4', md: '6' }} direction={{ base: 'column', sm: 'row' }}>
+            <Flex gap={{ base: '4', md: '6' }} direction={{ base: 'column', sm: user ? 'column' : 'row' }}>
                 <FormControl>
                     <FormLabel htmlFor='shippingAddress'>Shipping Address</FormLabel>
                     <Input
