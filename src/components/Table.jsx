@@ -1,123 +1,16 @@
 // ProductsListing.js
 import React, { useMemo, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { createColumnHelper, getCoreRowModel, useReactTable, flexRender, getPaginationRowModel, getFilteredRowModel } from '@tanstack/react-table';
-import { TableContainer, Table, Tbody, Td, Th, Thead, Tr, Button, IconButton, Flex, HStack, Input, Box, Select, Icon, Spacer, Badge } from '@chakra-ui/react';
+import { createColumnHelper, getCoreRowModel, useReactTable, flexRender, getPaginationRowModel, getFilteredRowModel, getSortedRowModel } from '@tanstack/react-table';
+import { TableContainer, Table, Tbody, Td, Th, Thead, Tr, Button, IconButton, Flex, HStack, Input, Box, Select, Icon, Spacer, Badge, Text } from '@chakra-ui/react';
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import SearchInput from './SearchInput';
 import DownloadBtn from './DownloadBtn';
-import { getMonetaryValue } from '../utils';
-import { formatDate } from '../utils';
+import SortIcon from '../icons/SortIcon';
+import { TbSortAscending, TbSortDescending } from "react-icons/tb";
 
-const ListingsTable = ({ data: tableData, columns: cols, fileName, render }) => {
+const ListingsTable = ({ data: tableData, columns, filterData, buttonState, fileName }) => {
     const { pathname } = useLocation();
-    const columnHelper = createColumnHelper();
-
-    const columns = cols.map(col => {
-        if (col.id === 'S/N') {
-            return (
-                columnHelper.accessor('', {
-                    id: col.id,
-                    cell: info => <span>{info.row.index + 1}</span>,
-                    header: col.header,
-                    // enableColumnFilter: false
-                })
-            )
-        }
-
-        if (col.id === 'active') {
-            return (
-                columnHelper.accessor(col.id, {
-                    id: col.id,
-                    cell: info => (
-                        <Badge colorScheme={info.getValue() === true ? 'green' : 'red'} variant='subtle'>
-                            {info.getValue() === true ? 'Active' : 'Inactive'}
-                        </Badge>
-                    ),
-                    header: col.header,
-                    // enableColumnFilter: false
-                })
-            )
-        }
-
-        if (col.id === 'totalAmount' || col.id === 'pricePerBag' || col.id === 'totalPrice' || col.id === 'amountPaid' || col.id === 'outstandingPayment' || col.id === 'amountPayable' || col.id === 'previousPaymentTotal') {
-            return (
-                columnHelper.accessor(col.id, {
-                    id: col.id,
-                    cell: info => (
-                        <span>
-                            {
-                                getMonetaryValue(info.getValue())
-                            }
-                        </span>
-                    ),
-                    header: col.header,
-                    // enableColumnFilter: false
-                })
-            )
-        }
-
-        if (col.id === 'date') {
-            return (
-                columnHelper.accessor(col.id, {
-                    id: col.id,
-                    cell: info => (
-                        <span>
-                            {
-                                formatDate(info.getValue())
-                            }
-                        </span>
-                    ),
-                    header: col.header,
-                })
-            )
-        }
-
-        if (col.id === 'refId') {
-            return (
-                columnHelper.accessor(col.id, {
-                    id: col.id,
-                    cell: info => (
-                        <span>
-                            {
-                                `${info.getValue().slice(0, 20)}...`
-                            }
-                        </span>
-                    ),
-                    header: col.header
-                })
-            )
-        }
-
-        if (col.id === 'actions') {
-            return (
-                columnHelper.accessor('', {
-                    id: col.id,
-                    cell: props => (
-                        render(props.row.original)
-                    ),
-                    header: col.header
-                })
-            )
-        }
-
-        return (
-            columnHelper.accessor(col.id, {
-                id: col.id,
-                cell: info => <span>
-                    {
-                        typeof info.getValue() === 'number' ? info.getValue() :
-                            info.getValue() ? info.getValue() : '-'
-                    }
-                </span>,
-                header: col.header,
-                // enableColumnFilter: (col.id === 'refId' || col.id === 'staff' || col.id === 'customer') ? true : false
-            })
-        )
-    });
-
-    // const [columnFilters, setColumnFilters] = useState(colFilters || []);
-
     const [data, setData] = useState(tableData);
 
     useEffect(() => {
@@ -129,12 +22,13 @@ const ListingsTable = ({ data: tableData, columns: cols, fileName, render }) => 
         data,
         columns,
         state: {
-            // columnFilters,
             globalFilter,
         },
         getFilteredRowModel: getFilteredRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel()
+        getPaginationRowModel: getPaginationRowModel(),
+        columnResizeMode: 'onChange',
     });
 
     const generateMultiplesOf10 = (totalNumber) => {
@@ -157,6 +51,12 @@ const ListingsTable = ({ data: tableData, columns: cols, fileName, render }) => 
 
                 <Spacer />
 
+                {
+                    (pathname === '/staff' || pathname === '/customers' || pathname === '/users') && <UsersFilter filterData={filterData} buttonState={buttonState} />
+                }
+
+                <Spacer />
+
                 <DownloadBtn data={tableData} fileName={fileName}>Download</DownloadBtn>
             </Flex>
             <TableContainer overflowX='auto'>
@@ -167,9 +67,38 @@ const ListingsTable = ({ data: tableData, columns: cols, fileName, render }) => 
                                 <Tr key={headerGroup.id}>
                                     {
                                         headerGroup.headers.map(header => (
-                                            <Th key={header.id}>
+                                            <Th key={header.id} pos={header.column.columnDef.accessorKey === 'refId' ? 'relative' : ''} w={header.getSize()}>
                                                 {
                                                     flexRender(header.column.columnDef.header, header.getContext())
+                                                }
+
+                                                {
+                                                    header.column.getCanSort() && (
+                                                        <Icon
+                                                            as={SortIcon}
+                                                            fontSize={14}
+                                                            mx={3}
+                                                            cursor='pointer'
+                                                            onClick={header.column.getToggleSortingHandler()}
+                                                        />
+                                                    )
+                                                }
+
+                                                {
+                                                    {
+                                                        'asc': <Icon as={TbSortAscending} fontSize={14} />,
+                                                        'desc': <Icon as={TbSortDescending} fontSize={14} />
+                                                    }[header.column.getIsSorted()]
+                                                }
+
+                                                {
+                                                    header.column.columnDef.accessorKey === 'refId' && (
+                                                        <Box
+                                                            onMouseDown={header.getResizeHandler()}
+                                                            onTouchStart={header.getResizeHandler()}
+                                                            className={`resizer ${header.column.getIsResizing() ? 'isResizing' : ''}`}
+                                                        />
+                                                    )
                                                 }
                                             </Th>
                                         ))
